@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration; // Add this namespace
 
 namespace WindowsFormsApp1
 {
     public partial class frm_rentItems : Form
     {
-        string url = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\User\Desktop\New folder\Equipment Inventory 11-8-2024\Equipment Inventory 10302024\Equipment Inventory 1\Equipment Inventory\WindowsFormsApp1\EquipmentItemDB.mdf"";Integrated Security=True");
-
+        private readonly string connectionString;
 
         public frm_rentItems()
         {
             InitializeComponent();
+            // Retrieve the connection string from App.config
+            connectionString = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
         }
-
 
         private void frm_rentItems_Load(object sender, EventArgs e)
         {
@@ -37,7 +32,7 @@ namespace WindowsFormsApp1
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\User\Desktop\New folder\Equipment Inventory 11-8-2024\Equipment Inventory 10302024\Equipment Inventory 1\Equipment Inventory\WindowsFormsApp1\EquipmentItemDB.mdf"";Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -60,9 +55,10 @@ namespace WindowsFormsApp1
         {
             Close();
         }
+
         private void LoadItemsIntoComboBox()
         {
-            using (SqlConnection conn = new SqlConnection(url))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -90,11 +86,12 @@ namespace WindowsFormsApp1
             DataTable itemData = GetItemDetailsFromDatabase(selectedItem);
             dgv_RentItems.DataSource = itemData;
         }
+
         private DataTable GetItemDetailsFromDatabase(string itemName)
         {
             DataTable table = new DataTable();
 
-            using (SqlConnection conn = new SqlConnection(url))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -112,7 +109,6 @@ namespace WindowsFormsApp1
             }
 
             return table;
-
         }
 
         private void TransferSelectedItem()
@@ -141,14 +137,14 @@ namespace WindowsFormsApp1
             }
 
 
-            using (SqlConnection connection = new SqlConnection(url))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "SELECT ItemID, ItemName, Category, Description, Condition, Status, SerialNo, Quantity, Cost, Image FROM TblEquipmentItems WHERE ItemName = @ItemName";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@ItemName", selectedItem);
 
-                    connection.Open();
+                    conn.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -182,7 +178,7 @@ namespace WindowsFormsApp1
                             string insertQuery = "INSERT INTO TblRentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, RentDate, Quantity, Cost, Image, CustomerName) " +
                                 "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @RentDate, @TransferQuantity, @Cost, @Image, @CustomerName)";
 
-                            using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
+                            using (SqlCommand insertCommand = new SqlCommand(insertQuery, conn))
                             {
                                 insertCommand.Parameters.AddWithValue("@ItemID", itemID);
                                 insertCommand.Parameters.AddWithValue("@ItemName", itemName);
@@ -206,7 +202,7 @@ namespace WindowsFormsApp1
 
                                     // Update quantity in TblEquipmentItems
                                     string updateQuery = "UPDATE TblEquipmentItems SET Quantity = Quantity - @TransferQuantity WHERE ItemID = @ItemID";
-                                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                                    using (SqlCommand updateCommand = new SqlCommand(updateQuery, conn))
                                     {
                                         updateCommand.Parameters.AddWithValue("@ItemID", itemID);
                                         updateCommand.Parameters.AddWithValue("@TransferQuantity", transferQuantity);
@@ -224,7 +220,7 @@ namespace WindowsFormsApp1
                                     // Log the action in tbl_Logs
                                     string logQuery = "INSERT INTO tbl_Logs (ItemID, ItemName, Action, Date, Time, LoggedBy, AssignedTo) " +
                                                       "VALUES (@ItemID, @ItemName, 'Item rented', @Date, @Time, @LoggedBy, @AssignedTo)";
-                                    using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                                    using (SqlCommand logCommand = new SqlCommand(logQuery, conn))
                                     {
                                         logCommand.Parameters.AddWithValue("@ItemID", itemID);
                                         logCommand.Parameters.AddWithValue("@ItemName", itemName);
@@ -259,7 +255,7 @@ namespace WindowsFormsApp1
 
         private void ReloadRentItemsData()
         {
-            using (SqlConnection conn = new SqlConnection(url))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {

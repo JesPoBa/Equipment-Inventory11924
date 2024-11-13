@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.linkLabel_EIS = new System.Windows.Forms.LinkLabel();
             this.panel23 = new System.Windows.Forms.Panel();
             this.lbl_loguser = new System.Windows.Forms.Label();
-            this.linkLabel_EIS = new System.Windows.Forms.LinkLabel();
             this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -67,14 +67,31 @@
             // 
             this.panel_Header.AutoSize = true;
             this.panel_Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
-            this.panel_Header.Controls.Add(this.panel23);
             this.panel_Header.Controls.Add(this.linkLabel_EIS);
+            this.panel_Header.Controls.Add(this.panel23);
             this.panel_Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Header.Location = new System.Drawing.Point(0, 0);
             this.panel_Header.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(1901, 50);
             this.panel_Header.TabIndex = 0;
+            // 
+            // linkLabel_EIS
+            // 
+            this.linkLabel_EIS.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.linkLabel_EIS.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.linkLabel_EIS.AutoSize = true;
+            this.linkLabel_EIS.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel_EIS.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabel_EIS.LinkColor = System.Drawing.Color.White;
+            this.linkLabel_EIS.Location = new System.Drawing.Point(641, 13);
+            this.linkLabel_EIS.Name = "linkLabel_EIS";
+            this.linkLabel_EIS.Size = new System.Drawing.Size(316, 29);
+            this.linkLabel_EIS.TabIndex = 5;
+            this.linkLabel_EIS.TabStop = true;
+            this.linkLabel_EIS.Text = "Equipment Inventory System";
+            this.linkLabel_EIS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabel_EIS.VisitedLinkColor = System.Drawing.Color.LightSteelBlue;
             // 
             // panel23
             // 
@@ -98,22 +115,6 @@
             this.lbl_loguser.Size = new System.Drawing.Size(44, 28);
             this.lbl_loguser.TabIndex = 3;
             this.lbl_loguser.Text = "....";
-            // 
-            // linkLabel_EIS
-            // 
-            this.linkLabel_EIS.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.linkLabel_EIS.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.linkLabel_EIS.AutoSize = true;
-            this.linkLabel_EIS.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel_EIS.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel_EIS.LinkColor = System.Drawing.Color.White;
-            this.linkLabel_EIS.Location = new System.Drawing.Point(12, 9);
-            this.linkLabel_EIS.Name = "linkLabel_EIS";
-            this.linkLabel_EIS.Size = new System.Drawing.Size(316, 29);
-            this.linkLabel_EIS.TabIndex = 5;
-            this.linkLabel_EIS.TabStop = true;
-            this.linkLabel_EIS.Text = "Equipment Inventory System";
-            this.linkLabel_EIS.VisitedLinkColor = System.Drawing.Color.LightSteelBlue;
             // 
             // sidebarTimer
             // 

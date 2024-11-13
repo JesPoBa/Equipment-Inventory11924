@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.Inventory_Folder;
-using WindowsFormsApp1.Helpers; // Add the namespace for the helper class
 
 namespace WindowsFormsApp1
 {
     public partial class frm_InventoryItems : Form
     {
-        static SqlConnection conn = null;
-        static SqlCommand cmd = null;
+        private SqlConnection conn;
 
         public frm_InventoryItems()
         {
@@ -27,9 +20,8 @@ namespace WindowsFormsApp1
 
         private void DatabaseConnection()
         {
-            string url = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\User\Desktop\New folder\Equipment Inventory 11-8-2024\Equipment Inventory 10302024\Equipment Inventory 1\Equipment Inventory\WindowsFormsApp1\EquipmentItemDB.mdf"";Integrated Security=True");
-
-            conn = new SqlConnection(url);
+            string connectionString = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
+            conn = new SqlConnection(connectionString);
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -135,7 +127,7 @@ namespace WindowsFormsApp1
             try
             {
                 // Use the connection inside the 'using' block
-                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\User\Desktop\New folder\Equipment Inventory 11-8-2024\Equipment Inventory 10302024\Equipment Inventory 1\Equipment Inventory\WindowsFormsApp1\EquipmentItemDB.mdf"";Integrated Security=True")) // Ensure you are using your connection string here
+                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""|DataDirectory|\EquipmentItemDB.mdf"";Integrated Security=True")) // Ensure you are using your connection string here
                 {
                     conn.Open();
 
@@ -395,22 +387,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void label_Dashboard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txt_SearchRentItems_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
         {
 
         }

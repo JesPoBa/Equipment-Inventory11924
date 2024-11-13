@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration; // Make sure to include this namespace
 
 namespace WindowsFormsApp1
 {
     public partial class frm_ItemLogs : Form
     {
-        // Set up your connection string here.
-        private readonly string connectionStringEDB = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\User\\Desktop\\New folder\\Equipment Inventory 11-8-2024\\Equipment Inventory 10302024\\Equipment Inventory 1\\Equipment Inventory\\WindowsFormsApp1\\EquipmentItemDB.mdf\";Integrated Security=True";
-       
+        // Use the connection string from App.config
+        private readonly string connectionStringEDB;
+
         public frm_ItemLogs()
         {
             InitializeComponent();
+            connectionStringEDB = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
             LoadLogsData();
         }
 
@@ -53,7 +49,6 @@ namespace WindowsFormsApp1
         {
             // TODO: This line of code loads data into the 'equipmentItemDBDataSet.tbl_Logs' table. You can move, or remove it, as needed.
             this.tbl_LogsTableAdapter.Fill(this.equipmentItemDBDataSet.tbl_Logs);
-
         }
     }
 }

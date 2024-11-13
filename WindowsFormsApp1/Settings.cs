@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Configuration;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -20,26 +14,23 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             DatabaseConnection();
-
-
         }
 
         private void DatabaseConnection()
         {
-            string url = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\User\Desktop\New folder\Equipment Inventory 11-8-2024\Equipment Inventory 10302024\Equipment Inventory 1\Equipment Inventory\WindowsFormsApp1\EquipmentItemDB.mdf"";Integrated Security=True");
-
-            conn = new SqlConnection(url);
+            string connectionString = ConfigurationManager.ConnectionStrings["WindowsFormsApp1.Properties.Settings.uaDBConnectionString"].ConnectionString;
+            conn = new SqlConnection(connectionString);
         }
 
         private void frm_Settings_Load(object sender, EventArgs e)
         {
-            if(ulog.type == "A")
+            if (ulog.type == "A")
             {
                 adduseradmin.Visible = true;
             }
-            else if(ulog.type == "U")
+            else if (ulog.type == "U")
             {
-                adduseradmin.Visible= false;
+                adduseradmin.Visible = false;
             }
             // TODO: This line of code loads data into the 'appData.tbllog' table. You can move, or remove it, as needed.
             this.tbllogTableAdapter.Fill(this.appData.tbllog);
@@ -58,10 +49,9 @@ namespace WindowsFormsApp1
         {
             try
             {
-               
                 Edit(true);
                 appData.tbllog.AddtbllogRow(appData.tbllog.NewtbllogRow());
-                tbllogBindingSource.MoveLast(); 
+                tbllogBindingSource.MoveLast();
                 txt_userName.Focus();
             }
             catch (Exception ex)
@@ -77,18 +67,15 @@ namespace WindowsFormsApp1
             // Check if there is a selected row in the DataGridView
             if (dgv_adminuser.SelectedRows.Count > 0)
             {
-                // Get the selected row
                 DataGridViewRow selectedRow = dgv_adminuser.SelectedRows[0];
 
                 // Check if the expected columns exist
                 if (selectedRow.Cells["Username"] != null && selectedRow.Cells["Password"] != null && selectedRow.Cells["Role"] != null)
                 {
-                    // Populate the text boxes with the selected row's data
                     txt_userName.Text = selectedRow.Cells["Username"].Value.ToString();
                     txt_password.Text = selectedRow.Cells["Password"].Value.ToString();
                     cb_role.Text = selectedRow.Cells["Role"].Value.ToString();
 
-                    // Enable editing
                     Edit(true);
                     txt_userName.Focus();
                 }
@@ -116,7 +103,6 @@ namespace WindowsFormsApp1
                     // Retrieve the Id from the hidden column
                     int selectedId = Convert.ToInt32(selectedRow.Cells["Id"].Value); // Assuming you have an Id column that is hidden
 
-                    // Update query
                     string query = "UPDATE tbllog SET Username = @Username, Password = @Password, Role = @Role WHERE Id = @Id";
                     conn.Open();
                     cmd = new SqlCommand(query, conn);
@@ -147,7 +133,6 @@ namespace WindowsFormsApp1
                     int records = cmd.ExecuteNonQuery();
                     MessageBox.Show("Your data has been successfully saved.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
                 // Reset the form
                 Edit(false);
                 tbllogBindingSource.EndEdit();
@@ -180,7 +165,6 @@ namespace WindowsFormsApp1
                         // Retrieve the Id from the hidden column
                         int selectedId = Convert.ToInt32(selectedRow.Cells["Id"].Value); // Assuming you have an Id column that is hidden
 
-                        // Delete query
                         string query = "DELETE FROM tbllog WHERE Id = @Id";
                         conn.Open();
                         cmd = new SqlCommand(query, conn);
@@ -195,7 +179,6 @@ namespace WindowsFormsApp1
                         {
                             MessageBox.Show("No records were deleted. Please check if the record exists.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-
                         // Remove the current item from the BindingSource
                         tbllogBindingSource.RemoveCurrent();
 

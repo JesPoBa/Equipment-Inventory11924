@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryApp", "WindowsFormsApp1\EquipmentInventoryApp.csproj", "{3C8641D9-931B-4C54-A4E2-AED7EF504BBB}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Bosstoyo", "Bosstoyo\Bosstoyo.vdproj", "{1CEEEDA3-22D0-49E1-9A91-2E10DC1BC43D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{3C8641D9-931B-4C54-A4E2-AED7EF504BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8641D9-931B-4C54-A4E2-AED7EF504BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C8641D9-931B-4C54-A4E2-AED7EF504BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CEEEDA3-22D0-49E1-9A91-2E10DC1BC43D}.Debug|Any CPU.ActiveCfg = Debug
+		{1CEEEDA3-22D0-49E1-9A91-2E10DC1BC43D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

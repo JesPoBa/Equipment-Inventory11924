@@ -50,6 +50,20 @@
             this.btn_AddNewItem = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv_RentItems = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReturnDated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblRentItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dgv_ReturnedItems = new System.Windows.Forms.DataGridView();
@@ -74,20 +88,6 @@
             this.btn_SearchRentItems = new System.Windows.Forms.Button();
             this.btn_TransferToReturned = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReturnDated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InventoryList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentItemDBDataSet)).BeginInit();
@@ -107,7 +107,6 @@
             this.label_Dashboard.Size = new System.Drawing.Size(166, 30);
             this.label_Dashboard.TabIndex = 1;
             this.label_Dashboard.Text = "Inventory List";
-            this.label_Dashboard.Click += new System.EventHandler(this.label_Dashboard_Click);
             // 
             // btn_rentItem
             // 
@@ -321,7 +320,6 @@
             this.label1.Size = new System.Drawing.Size(141, 30);
             this.label1.TabIndex = 13;
             this.label1.Text = "Rented List";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dgv_RentItems
             // 
@@ -354,6 +352,129 @@
             this.dgv_RentItems.Size = new System.Drawing.Size(1551, 255);
             this.dgv_RentItems.TabIndex = 14;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Rent ID";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 4;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // ItemID
+            // 
+            this.ItemID.DataPropertyName = "ItemID";
+            this.ItemID.HeaderText = "Item ID";
+            this.ItemID.MinimumWidth = 8;
+            this.ItemID.Name = "ItemID";
+            this.ItemID.Width = 77;
+            // 
+            // ItemName
+            // 
+            this.ItemName.DataPropertyName = "ItemName";
+            this.ItemName.HeaderText = "Item Name";
+            this.ItemName.MinimumWidth = 6;
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Width = 125;
+            // 
+            // Category
+            // 
+            this.Category.DataPropertyName = "Category";
+            this.Category.HeaderText = "Category";
+            this.Category.MinimumWidth = 6;
+            this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
+            this.Category.Width = 125;
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.MinimumWidth = 6;
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 125;
+            // 
+            // Condition
+            // 
+            this.Condition.DataPropertyName = "Condition";
+            this.Condition.HeaderText = "Condition";
+            this.Condition.MinimumWidth = 6;
+            this.Condition.Name = "Condition";
+            this.Condition.ReadOnly = true;
+            this.Condition.Width = 125;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Visible = false;
+            this.Status.Width = 125;
+            // 
+            // SerialNo
+            // 
+            this.SerialNo.DataPropertyName = "SerialNo";
+            this.SerialNo.HeaderText = "Serial No.";
+            this.SerialNo.MinimumWidth = 6;
+            this.SerialNo.Name = "SerialNo";
+            this.SerialNo.ReadOnly = true;
+            this.SerialNo.Width = 125;
+            // 
+            // RentDate
+            // 
+            this.RentDate.DataPropertyName = "RentDate";
+            this.RentDate.HeaderText = "RentDate";
+            this.RentDate.MinimumWidth = 6;
+            this.RentDate.Name = "RentDate";
+            this.RentDate.ReadOnly = true;
+            this.RentDate.Width = 125;
+            // 
+            // ReturnDated
+            // 
+            this.ReturnDated.DataPropertyName = "ReturnDated";
+            this.ReturnDated.HeaderText = "ReturnDated";
+            this.ReturnDated.MinimumWidth = 6;
+            this.ReturnDated.Name = "ReturnDated";
+            this.ReturnDated.ReadOnly = true;
+            this.ReturnDated.Width = 125;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.MinimumWidth = 6;
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Width = 125;
+            // 
+            // Cost
+            // 
+            this.Cost.DataPropertyName = "Cost";
+            this.Cost.HeaderText = "Cost";
+            this.Cost.MinimumWidth = 6;
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
+            this.Cost.Width = 125;
+            // 
+            // Image
+            // 
+            this.Image.DataPropertyName = "Image";
+            this.Image.HeaderText = "Image";
+            this.Image.MinimumWidth = 6;
+            this.Image.Name = "Image";
+            this.Image.Width = 125;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.DataPropertyName = "CustomerName";
+            this.CustomerName.HeaderText = "Customer Name";
+            this.CustomerName.MinimumWidth = 6;
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.ReadOnly = true;
+            this.CustomerName.Width = 125;
+            // 
             // tblRentItemsBindingSource
             // 
             this.tblRentItemsBindingSource.DataMember = "TblRentItems";
@@ -369,7 +490,6 @@
             this.label2.Size = new System.Drawing.Size(182, 30);
             this.label2.TabIndex = 15;
             this.label2.Text = "Returned Item";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // dgv_ReturnedItems
             // 
@@ -593,129 +713,6 @@
             this.label3.Size = new System.Drawing.Size(44, 16);
             this.label3.TabIndex = 21;
             this.label3.Text = "label3";
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Rent ID";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 4;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // ItemID
-            // 
-            this.ItemID.DataPropertyName = "ItemID";
-            this.ItemID.HeaderText = "Item ID";
-            this.ItemID.MinimumWidth = 8;
-            this.ItemID.Name = "ItemID";
-            this.ItemID.Width = 77;
-            // 
-            // ItemName
-            // 
-            this.ItemName.DataPropertyName = "ItemName";
-            this.ItemName.HeaderText = "Item Name";
-            this.ItemName.MinimumWidth = 6;
-            this.ItemName.Name = "ItemName";
-            this.ItemName.Width = 125;
-            // 
-            // Category
-            // 
-            this.Category.DataPropertyName = "Category";
-            this.Category.HeaderText = "Category";
-            this.Category.MinimumWidth = 6;
-            this.Category.Name = "Category";
-            this.Category.ReadOnly = true;
-            this.Category.Width = 125;
-            // 
-            // Description
-            // 
-            this.Description.DataPropertyName = "Description";
-            this.Description.HeaderText = "Description";
-            this.Description.MinimumWidth = 6;
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            this.Description.Width = 125;
-            // 
-            // Condition
-            // 
-            this.Condition.DataPropertyName = "Condition";
-            this.Condition.HeaderText = "Condition";
-            this.Condition.MinimumWidth = 6;
-            this.Condition.Name = "Condition";
-            this.Condition.ReadOnly = true;
-            this.Condition.Width = 125;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "Status";
-            this.Status.MinimumWidth = 6;
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Visible = false;
-            this.Status.Width = 125;
-            // 
-            // SerialNo
-            // 
-            this.SerialNo.DataPropertyName = "SerialNo";
-            this.SerialNo.HeaderText = "Serial No.";
-            this.SerialNo.MinimumWidth = 6;
-            this.SerialNo.Name = "SerialNo";
-            this.SerialNo.ReadOnly = true;
-            this.SerialNo.Width = 125;
-            // 
-            // RentDate
-            // 
-            this.RentDate.DataPropertyName = "RentDate";
-            this.RentDate.HeaderText = "RentDate";
-            this.RentDate.MinimumWidth = 6;
-            this.RentDate.Name = "RentDate";
-            this.RentDate.ReadOnly = true;
-            this.RentDate.Width = 125;
-            // 
-            // ReturnDated
-            // 
-            this.ReturnDated.DataPropertyName = "ReturnDated";
-            this.ReturnDated.HeaderText = "ReturnDated";
-            this.ReturnDated.MinimumWidth = 6;
-            this.ReturnDated.Name = "ReturnDated";
-            this.ReturnDated.ReadOnly = true;
-            this.ReturnDated.Width = 125;
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.MinimumWidth = 6;
-            this.Quantity.Name = "Quantity";
-            this.Quantity.Width = 125;
-            // 
-            // Cost
-            // 
-            this.Cost.DataPropertyName = "Cost";
-            this.Cost.HeaderText = "Cost";
-            this.Cost.MinimumWidth = 6;
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
-            this.Cost.Width = 125;
-            // 
-            // Image
-            // 
-            this.Image.DataPropertyName = "Image";
-            this.Image.HeaderText = "Image";
-            this.Image.MinimumWidth = 6;
-            this.Image.Name = "Image";
-            this.Image.Width = 125;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.DataPropertyName = "CustomerName";
-            this.CustomerName.HeaderText = "Customer Name";
-            this.CustomerName.MinimumWidth = 6;
-            this.CustomerName.Name = "CustomerName";
-            this.CustomerName.ReadOnly = true;
-            this.CustomerName.Width = 125;
             // 
             // frm_InventoryItems
             // 

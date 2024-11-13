@@ -1,15 +1,10 @@
-﻿using Org.BouncyCastle.Asn1.Cmp;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1.Inventory_Folder
 {
@@ -21,9 +16,10 @@ namespace WindowsFormsApp1.Inventory_Folder
             DatabaseConnection();
         }
 
-        private void DatabaseConnection()
+        private SqlConnection DatabaseConnection()
         {
-            // Define your connection string here or use App.config
+            string connectionString = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
+            return new SqlConnection(connectionString);
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
@@ -62,10 +58,7 @@ namespace WindowsFormsApp1.Inventory_Folder
             string insertItemQuery = "INSERT INTO TblEquipmentItems (ItemID, ItemName, Category, Description, Condition, Status, DatePurchased, SerialNo, Quantity, Cost, Image) " +
                                      "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @DatePurchased, @SerialNo, @Quantity, @Cost, @Image)";
 
-            // Connection string (you can move this to App.config for easier management)
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\User\\Desktop\\New folder\\Equipment Inventory 11-8-2024\\Equipment Inventory 10302024\\Equipment Inventory 1\\Equipment Inventory\\WindowsFormsApp1\\EquipmentItemDB.mdf\";Integrated Security=True";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = DatabaseConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(insertItemQuery, conn))
                 {
@@ -142,7 +135,7 @@ namespace WindowsFormsApp1.Inventory_Folder
             string logQuery = "INSERT INTO tbl_Logs (ItemID, ItemName, Action, Date, Time, LoggedBy, AssignedTo, Condition) " +
                               "VALUES (@ItemID, @ItemName, @Action, @Date, @Time, @LoggedBy, @AssignedTo, @Condition)";
 
-            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\User\\Desktop\\New folder\\Equipment Inventory 11-8-2024\\Equipment Inventory 10302024\\Equipment Inventory 1\\Equipment Inventory\\WindowsFormsApp1\\EquipmentItemDB.mdf\";Integrated Security=True"))
+            using (SqlConnection conn = DatabaseConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(logQuery, conn))
                 {
@@ -193,7 +186,7 @@ namespace WindowsFormsApp1.Inventory_Folder
         {
             // Load categories from the database
             string query = "SELECT Category FROM TblCategory";
-            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\User\\Desktop\\New folder\\Equipment Inventory 11-8-2024\\Equipment Inventory 10302024\\Equipment Inventory 1\\Equipment Inventory\\WindowsFormsApp1\\EquipmentItemDB.mdf\";Integrated Security=True"))
+            using (SqlConnection conn = DatabaseConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -205,7 +198,7 @@ namespace WindowsFormsApp1.Inventory_Folder
                     cb_Category.DataSource = categories;
                     cb_Category.DisplayMember = "Category";
                     cb_Category.ValueMember = "Category";
-                    
+
                 }
             }
         }
