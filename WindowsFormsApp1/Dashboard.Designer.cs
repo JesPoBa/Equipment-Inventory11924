@@ -107,7 +107,7 @@
             this.linkLabel_EIS.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel_EIS.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkLabel_EIS.LinkColor = System.Drawing.Color.White;
-            this.linkLabel_EIS.Location = new System.Drawing.Point(795, 9);
+            this.linkLabel_EIS.Location = new System.Drawing.Point(12, 9);
             this.linkLabel_EIS.Name = "linkLabel_EIS";
             this.linkLabel_EIS.Size = new System.Drawing.Size(316, 29);
             this.linkLabel_EIS.TabIndex = 5;
