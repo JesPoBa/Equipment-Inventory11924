@@ -131,7 +131,6 @@ namespace WindowsFormsApp1.Inventory_Folder
         // Method to log the new item creation in tbl_Logs
         private void LogNewItem(string itemID, string itemName, string action)
         {
-            // SQL query to insert data into tbl_Logs
             string logQuery = "INSERT INTO tbl_Logs (ItemID, ItemName, Action, Date, Time, LoggedBy, AssignedTo, Condition) " +
                               "VALUES (@ItemID, @ItemName, @Action, @Date, @Time, @LoggedBy, @AssignedTo, @Condition)";
 
@@ -149,8 +148,8 @@ namespace WindowsFormsApp1.Inventory_Folder
                         cmd.Parameters.AddWithValue("@Action", action);
                         cmd.Parameters.AddWithValue("@Date", DateTime.Now.Date);
                         cmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
-                        cmd.Parameters.AddWithValue("@LoggedBy", Environment.UserName); // Assuming this is the username of the person logged in
-                        cmd.Parameters.AddWithValue("@AssignedTo", DBNull.Value); // AssignedTo is left blank
+                        cmd.Parameters.AddWithValue("@LoggedBy", ulog.Username); // Use the logged-in username
+                        cmd.Parameters.AddWithValue("@AssignedTo", DBNull.Value); // Leave AssignedTo blank
                         cmd.Parameters.AddWithValue("@Condition", cb_Condition.Text); // Use the Condition selected in the form
 
                         cmd.ExecuteNonQuery();
@@ -166,6 +165,7 @@ namespace WindowsFormsApp1.Inventory_Folder
                 }
             }
         }
+
 
         public byte[] ConvertImageToByteArray(Image image)
         {

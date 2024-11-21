@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label_Dashboard = new System.Windows.Forms.Label();
             this.btn_rentItem = new System.Windows.Forms.Button();
             this.txt_Search = new System.Windows.Forms.TextBox();
@@ -44,6 +45,8 @@
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.costDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imageDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tblEquipmentItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.equipmentItemDBDataSet = new WindowsFormsApp1.EquipmentItemDBDataSet();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -58,12 +61,12 @@
             this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReturnDated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblRentItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dgv_ReturnedItems = new System.Windows.Forms.DataGridView();
@@ -89,6 +92,7 @@
             this.btn_TransferToReturned = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InventoryList)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentItemDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_RentItems)).BeginInit();
@@ -102,7 +106,7 @@
             this.label_Dashboard.AutoSize = true;
             this.label_Dashboard.Font = new System.Drawing.Font("Century Gothic", 14F);
             this.label_Dashboard.ForeColor = System.Drawing.Color.Black;
-            this.label_Dashboard.Location = new System.Drawing.Point(99, 23);
+            this.label_Dashboard.Location = new System.Drawing.Point(168, 69);
             this.label_Dashboard.Name = "label_Dashboard";
             this.label_Dashboard.Size = new System.Drawing.Size(166, 30);
             this.label_Dashboard.TabIndex = 1;
@@ -161,6 +165,7 @@
             this.quantityDataGridViewTextBoxColumn,
             this.costDataGridViewTextBoxColumn,
             this.imageDataGridViewImageColumn});
+            this.dgv_InventoryList.ContextMenuStrip = this.contextMenuStrip;
             this.dgv_InventoryList.DataSource = this.tblEquipmentItemsBindingSource;
             this.dgv_InventoryList.Location = new System.Drawing.Point(173, 139);
             this.dgv_InventoryList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -174,7 +179,9 @@
             // itemIDDataGridViewTextBoxColumn
             // 
             this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
-            this.itemIDDataGridViewTextBoxColumn.HeaderText = "ItemID";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.itemIDDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.itemIDDataGridViewTextBoxColumn.HeaderText = "Item ID";
             this.itemIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
             this.itemIDDataGridViewTextBoxColumn.ReadOnly = true;
@@ -183,7 +190,7 @@
             // itemNameDataGridViewTextBoxColumn
             // 
             this.itemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName";
-            this.itemNameDataGridViewTextBoxColumn.HeaderText = "ItemName";
+            this.itemNameDataGridViewTextBoxColumn.HeaderText = "Item Name";
             this.itemNameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.itemNameDataGridViewTextBoxColumn.Name = "itemNameDataGridViewTextBoxColumn";
             this.itemNameDataGridViewTextBoxColumn.ReadOnly = true;
@@ -229,7 +236,7 @@
             // datePurchasedDataGridViewTextBoxColumn
             // 
             this.datePurchasedDataGridViewTextBoxColumn.DataPropertyName = "DatePurchased";
-            this.datePurchasedDataGridViewTextBoxColumn.HeaderText = "DatePurchased";
+            this.datePurchasedDataGridViewTextBoxColumn.HeaderText = "Date Purchased";
             this.datePurchasedDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.datePurchasedDataGridViewTextBoxColumn.Name = "datePurchasedDataGridViewTextBoxColumn";
             this.datePurchasedDataGridViewTextBoxColumn.ReadOnly = true;
@@ -238,7 +245,7 @@
             // serialNoDataGridViewTextBoxColumn
             // 
             this.serialNoDataGridViewTextBoxColumn.DataPropertyName = "SerialNo";
-            this.serialNoDataGridViewTextBoxColumn.HeaderText = "SerialNo";
+            this.serialNoDataGridViewTextBoxColumn.HeaderText = "Serial No.";
             this.serialNoDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.serialNoDataGridViewTextBoxColumn.Name = "serialNoDataGridViewTextBoxColumn";
             this.serialNoDataGridViewTextBoxColumn.ReadOnly = true;
@@ -270,6 +277,22 @@
             this.imageDataGridViewImageColumn.Name = "imageDataGridViewImageColumn";
             this.imageDataGridViewImageColumn.ReadOnly = true;
             this.imageDataGridViewImageColumn.Width = 125;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(215, 58);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.x_mark_24;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.deleteToolStripMenuItem.Text = "Delete a Row";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // tblEquipmentItemsBindingSource
             // 
@@ -315,7 +338,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 14F);
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(99, 367);
+            this.label1.Location = new System.Drawing.Point(168, 377);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 30);
             this.label1.TabIndex = 13;
@@ -337,12 +360,13 @@
             this.Condition,
             this.Status,
             this.SerialNo,
+            this.CustomerName,
             this.RentDate,
             this.ReturnDated,
             this.Quantity,
             this.Cost,
-            this.Image,
-            this.CustomerName});
+            this.Image});
+            this.dgv_RentItems.ContextMenuStrip = this.contextMenuStrip;
             this.dgv_RentItems.DataSource = this.tblRentItemsBindingSource;
             this.dgv_RentItems.Location = new System.Drawing.Point(173, 446);
             this.dgv_RentItems.Margin = new System.Windows.Forms.Padding(4);
@@ -359,7 +383,8 @@
             this.idDataGridViewTextBoxColumn.MinimumWidth = 4;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 80;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.idDataGridViewTextBoxColumn.Width = 160;
             // 
             // ItemID
             // 
@@ -367,6 +392,7 @@
             this.ItemID.HeaderText = "Item ID";
             this.ItemID.MinimumWidth = 8;
             this.ItemID.Name = "ItemID";
+            this.ItemID.Visible = false;
             this.ItemID.Width = 77;
             // 
             // ItemName
@@ -423,10 +449,19 @@
             this.SerialNo.ReadOnly = true;
             this.SerialNo.Width = 125;
             // 
+            // CustomerName
+            // 
+            this.CustomerName.DataPropertyName = "CustomerName";
+            this.CustomerName.HeaderText = "Customer Name";
+            this.CustomerName.MinimumWidth = 6;
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.ReadOnly = true;
+            this.CustomerName.Width = 125;
+            // 
             // RentDate
             // 
             this.RentDate.DataPropertyName = "RentDate";
-            this.RentDate.HeaderText = "RentDate";
+            this.RentDate.HeaderText = "Rent Date";
             this.RentDate.MinimumWidth = 6;
             this.RentDate.Name = "RentDate";
             this.RentDate.ReadOnly = true;
@@ -435,7 +470,7 @@
             // ReturnDated
             // 
             this.ReturnDated.DataPropertyName = "ReturnDated";
-            this.ReturnDated.HeaderText = "ReturnDated";
+            this.ReturnDated.HeaderText = "Return Dated";
             this.ReturnDated.MinimumWidth = 6;
             this.ReturnDated.Name = "ReturnDated";
             this.ReturnDated.ReadOnly = true;
@@ -466,15 +501,6 @@
             this.Image.Name = "Image";
             this.Image.Width = 125;
             // 
-            // CustomerName
-            // 
-            this.CustomerName.DataPropertyName = "CustomerName";
-            this.CustomerName.HeaderText = "Customer Name";
-            this.CustomerName.MinimumWidth = 6;
-            this.CustomerName.Name = "CustomerName";
-            this.CustomerName.ReadOnly = true;
-            this.CustomerName.Width = 125;
-            // 
             // tblRentItemsBindingSource
             // 
             this.tblRentItemsBindingSource.DataMember = "TblRentItems";
@@ -485,7 +511,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 14F);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(99, 704);
+            this.label2.Location = new System.Drawing.Point(168, 714);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(182, 30);
             this.label2.TabIndex = 15;
@@ -511,6 +537,7 @@
             this.returnDateDataGridViewTextBoxColumn,
             this.costDataGridViewTextBoxColumn2,
             this.imageDataGridViewImageColumn1});
+            this.dgv_ReturnedItems.ContextMenuStrip = this.contextMenuStrip;
             this.dgv_ReturnedItems.DataSource = this.tblReturnedItemsBindingSource;
             this.dgv_ReturnedItems.Location = new System.Drawing.Point(173, 748);
             this.dgv_ReturnedItems.Margin = new System.Windows.Forms.Padding(4);
@@ -555,6 +582,7 @@
             this.descriptionDataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.descriptionDataGridViewTextBoxColumn2.Name = "descriptionDataGridViewTextBoxColumn2";
             this.descriptionDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn2.ToolTipText = "Description of the Item.";
             this.descriptionDataGridViewTextBoxColumn2.Width = 125;
             // 
             // conditionDataGridViewTextBoxColumn2
@@ -668,7 +696,7 @@
             // 
             this.txt_SearchRentItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_SearchRentItems.Font = new System.Drawing.Font("Segoe UI", 10.8F);
-            this.txt_SearchRentItems.Location = new System.Drawing.Point(175, 409);
+            this.txt_SearchRentItems.Location = new System.Drawing.Point(172, 409);
             this.txt_SearchRentItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txt_SearchRentItems.Name = "txt_SearchRentItems";
             this.txt_SearchRentItems.Size = new System.Drawing.Size(309, 31);
@@ -684,7 +712,7 @@
             this.btn_SearchRentItems.FlatAppearance.BorderSize = 0;
             this.btn_SearchRentItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SearchRentItems.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_SearchRentItems.Location = new System.Drawing.Point(487, 409);
+            this.btn_SearchRentItems.Location = new System.Drawing.Point(485, 409);
             this.btn_SearchRentItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_SearchRentItems.Name = "btn_SearchRentItems";
             this.btn_SearchRentItems.Size = new System.Drawing.Size(39, 30);
@@ -710,9 +738,8 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(772, 1077);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 21;
-            this.label3.Text = "label3";
             // 
             // frm_InventoryItems
             // 
@@ -739,11 +766,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frm_InventoryItems";
+            this.Opacity = 0D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory_Items";
             this.Load += new System.EventHandler(this.frm_InventoryItems_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InventoryList)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentItemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentItemDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_RentItems)).EndInit();
@@ -777,6 +806,7 @@
         private System.Windows.Forms.TextBox txt_SearchRentItems;
         private System.Windows.Forms.Button btn_SearchRentItems;
         private System.Windows.Forms.Button btn_TransferToReturned;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
@@ -788,6 +818,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewImageColumn imageDataGridViewImageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Condition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReturnDated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cost;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemIDDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemNameDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn2;
@@ -800,20 +844,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn returnDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewImageColumn imageDataGridViewImageColumn1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Condition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReturnDated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cost;
-        private System.Windows.Forms.DataGridViewImageColumn Image;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerName;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

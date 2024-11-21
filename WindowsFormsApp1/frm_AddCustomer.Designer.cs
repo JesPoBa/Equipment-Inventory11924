@@ -53,6 +53,51 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblCustomersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
+            // customerNameLabel
+            // 
+            customerNameLabel.AutoSize = true;
+            customerNameLabel.Location = new System.Drawing.Point(98, 115);
+            customerNameLabel.Name = "customerNameLabel";
+            customerNameLabel.Size = new System.Drawing.Size(107, 16);
+            customerNameLabel.TabIndex = 3;
+            customerNameLabel.Text = "Customer Name:";
+            // 
+            // contactNumberLabel
+            // 
+            contactNumberLabel.AutoSize = true;
+            contactNumberLabel.Location = new System.Drawing.Point(98, 185);
+            contactNumberLabel.Name = "contactNumberLabel";
+            contactNumberLabel.Size = new System.Drawing.Size(106, 16);
+            contactNumberLabel.TabIndex = 5;
+            contactNumberLabel.Text = "Contact Number:";
+            // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.Location = new System.Drawing.Point(98, 230);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new System.Drawing.Size(44, 16);
+            emailLabel.TabIndex = 7;
+            emailLabel.Text = "Email:";
+            // 
+            // addressLabel
+            // 
+            addressLabel.AutoSize = true;
+            addressLabel.Location = new System.Drawing.Point(98, 277);
+            addressLabel.Name = "addressLabel";
+            addressLabel.Size = new System.Drawing.Size(61, 16);
+            addressLabel.TabIndex = 9;
+            addressLabel.Text = "Address:";
+            // 
+            // rentalStatusLabel
+            // 
+            rentalStatusLabel.AutoSize = true;
+            rentalStatusLabel.Location = new System.Drawing.Point(98, 390);
+            rentalStatusLabel.Name = "rentalStatusLabel";
+            rentalStatusLabel.Size = new System.Drawing.Size(89, 16);
+            rentalStatusLabel.TabIndex = 11;
+            rentalStatusLabel.Text = "Rental Status:";
+            // 
             // equipmentItemDBDataSet
             // 
             this.equipmentItemDBDataSet.DataSetName = "EquipmentItemDBDataSet";
@@ -70,21 +115,13 @@
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.tbl_LogsTableAdapter = null;
             this.tableAdapterManager.TblCategoryTableAdapter = null;
             this.tableAdapterManager.TblCustomersTableAdapter = this.tblCustomersTableAdapter;
             this.tableAdapterManager.TblEquipmentItemsTableAdapter = null;
             this.tableAdapterManager.TblRentItemsTableAdapter = null;
             this.tableAdapterManager.TblReturnedItemsTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.EquipmentItemDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // customerNameLabel
-            // 
-            customerNameLabel.AutoSize = true;
-            customerNameLabel.Location = new System.Drawing.Point(98, 115);
-            customerNameLabel.Name = "customerNameLabel";
-            customerNameLabel.Size = new System.Drawing.Size(107, 16);
-            customerNameLabel.TabIndex = 3;
-            customerNameLabel.Text = "Customer Name:";
             // 
             // txt_CustomerName
             // 
@@ -94,15 +131,6 @@
             this.txt_CustomerName.Size = new System.Drawing.Size(304, 22);
             this.txt_CustomerName.TabIndex = 4;
             // 
-            // contactNumberLabel
-            // 
-            contactNumberLabel.AutoSize = true;
-            contactNumberLabel.Location = new System.Drawing.Point(98, 185);
-            contactNumberLabel.Name = "contactNumberLabel";
-            contactNumberLabel.Size = new System.Drawing.Size(106, 16);
-            contactNumberLabel.TabIndex = 5;
-            contactNumberLabel.Text = "Contact Number:";
-            // 
             // txt_ContactNumber
             // 
             this.txt_ContactNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tblCustomersBindingSource, "ContactNumber", true));
@@ -110,15 +138,6 @@
             this.txt_ContactNumber.Name = "txt_ContactNumber";
             this.txt_ContactNumber.Size = new System.Drawing.Size(304, 22);
             this.txt_ContactNumber.TabIndex = 6;
-            // 
-            // emailLabel
-            // 
-            emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(98, 230);
-            emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(44, 16);
-            emailLabel.TabIndex = 7;
-            emailLabel.Text = "Email:";
             // 
             // txt_Email
             // 
@@ -128,15 +147,6 @@
             this.txt_Email.Size = new System.Drawing.Size(304, 22);
             this.txt_Email.TabIndex = 8;
             // 
-            // addressLabel
-            // 
-            addressLabel.AutoSize = true;
-            addressLabel.Location = new System.Drawing.Point(98, 277);
-            addressLabel.Name = "addressLabel";
-            addressLabel.Size = new System.Drawing.Size(61, 16);
-            addressLabel.TabIndex = 9;
-            addressLabel.Text = "Address:";
-            // 
             // txt_Address
             // 
             this.txt_Address.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tblCustomersBindingSource, "Address", true));
@@ -145,15 +155,6 @@
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(304, 91);
             this.txt_Address.TabIndex = 10;
-            // 
-            // rentalStatusLabel
-            // 
-            rentalStatusLabel.AutoSize = true;
-            rentalStatusLabel.Location = new System.Drawing.Point(98, 390);
-            rentalStatusLabel.Name = "rentalStatusLabel";
-            rentalStatusLabel.Size = new System.Drawing.Size(89, 16);
-            rentalStatusLabel.TabIndex = 11;
-            rentalStatusLabel.Text = "Rental Status:";
             // 
             // cmb_RentalStatus
             // 
@@ -194,7 +195,7 @@
             this.Controls.Add(this.txt_CustomerName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frm_AddCustomer";
-            this.Text = "frm_AddCustomer";
+            this.Text = "Add Customer";
             this.Load += new System.EventHandler(this.frm_AddCustomer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.equipmentItemDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblCustomersBindingSource)).EndInit();

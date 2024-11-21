@@ -129,7 +129,7 @@
             // 
             this.dgvRentItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRentItems.Location = new System.Drawing.Point(389, 223);
-            this.dgvRentItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvRentItems.Margin = new System.Windows.Forms.Padding(4);
             this.dgvRentItems.Name = "dgvRentItems";
             this.dgvRentItems.RowHeadersWidth = 51;
             this.dgvRentItems.Size = new System.Drawing.Size(1208, 199);
@@ -139,7 +139,7 @@
             // 
             this.dgvReturnedItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReturnedItems.Location = new System.Drawing.Point(389, 489);
-            this.dgvReturnedItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvReturnedItems.Margin = new System.Windows.Forms.Padding(4);
             this.dgvReturnedItems.Name = "dgvReturnedItems";
             this.dgvReturnedItems.RowHeadersWidth = 51;
             this.dgvReturnedItems.Size = new System.Drawing.Size(1208, 199);
@@ -176,6 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1651, 743);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -192,7 +193,6 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(1651, 743);
             this.Name = "Dashboard_main";
             this.Text = "Dashboard_main";
             this.Load += new System.EventHandler(this.Dashboard_main_Load);

@@ -22,36 +22,32 @@ namespace WindowsFormsApp1
         private void buttonLog_in_Click(object sender, EventArgs e)
         {
             con.Open();
-            cmd = new SqlCommand("SELECT * FROM tbllog WHERE Username='" + textUsername.Text + "' and Password='" + textPassword.Text + "'", con);
-            da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            int i = ds.Tables[0].Rows.Count;
-            if (i == 1)
+            cmd = new SqlCommand("SELECT * FROM tbllog WHERE Username=@Username AND Password=@Password", con);
+            cmd.Parameters.AddWithValue("@Username", textUsername.Text);
+            cmd.Parameters.AddWithValue("@Password", textPassword.Text);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
             {
-                SqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
-                if (dr[3].ToString() == "Admin")
-                {
-                    ulog.type = "A";
-                }
-                else if (dr[3].ToString() == "User")
-                {
-                    ulog.type = "U";
-                }
-                log = "Welcome: " + textUsername.Text;
+                ulog.Username = dr["Username"].ToString();
+                ulog.Type = dr["Role"].ToString() == "Admin" ? "A" : "U"; // Assuming "Role" column defines admin/user
+
+                log = ulog.Username;
                 this.Hide();
                 frm_dashboard fd = new frm_dashboard(log);
                 fd.Show();
-
-
+                
             }
             else
             {
-                MessageBox.Show("Please checkyour User name or Password", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please check your Username or Password", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             con.Close();
         }
+
+
 
         private void label2_Click(object sender, EventArgs e)
         {

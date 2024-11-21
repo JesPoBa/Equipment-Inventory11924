@@ -364,7 +364,7 @@ namespace WindowsFormsApp1
                     RefreshReturnedItems();
                     RefreshEquipmentItems();
 
-                    MessageBox.Show("Item successfully transferred to Returned Items, updated in Equipment Items, and logged in tbl_Logs.");
+                    MessageBox.Show("Item successfully transferred to Returned Items, updated in Equipment Items, and logged in Item Logs.");
                 }
                 catch (SqlException ex)
                 {
@@ -390,6 +390,102 @@ namespace WindowsFormsApp1
         private void txt_SearchRentItems_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        // Function to delete a row from a given DataGridView
+        private void DeleteRowFromDataGridView(DataGridView dgv)
+        {
+            // Check if a row is selected
+            if (dgv.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = dgv.SelectedRows[0];
+
+                // Optionally, get the ID or primary key (ItemID) if you need to delete from a database
+                var itemId = selectedRow.Cells["itemIDDataGridViewTextBoxColumn"].Value;
+
+                // Determine which table to delete from based on the DataGridView
+                string tableName = dgv == dgv_InventoryList ? "TblEquipmentItems" : "TblRentItems";
+
+                // Confirm deletion
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete this row?",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        // Remove from DataGridView
+                        dgv.Rows.Remove(selectedRow);
+
+                        // Update the database (delete from the correct table)
+                        DeleteItemFromDatabase(itemId, tableName);
+
+                        MessageBox.Show("Row deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Delete from Database (differentiates between TblEquipmentItems and TblRentItems)
+        private void DeleteItemFromDatabase(object itemId, string tableName)
+        {
+            try
+            {
+                string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;";
+
+                // Prepare query to delete from the specified table
+                string query = $"DELETE FROM {tableName} WHERE ItemID = @ItemID";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ItemID", itemId);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // For each context menu item click, call the delete function with the appropriate DataGridView
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteRowFromDataGridView(dgv_InventoryList);
+        }
+
+        private void deleteRentItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteRowFromDataGridView(dgv_RentItems);
+        }
+
+
+        private DataGridView ActiveDataGridView()
+        {
+            // Identify which DataGridView is active or clicked
+            if (dgv_InventoryList.Focused)
+                return dgv_InventoryList;
+            if (dgv_RentItems.Focused)
+                return dgv_RentItems;
+            if (dgv_ReturnedItems.Focused)
+                return dgv_ReturnedItems;
+            return null;
         }
     }
 }

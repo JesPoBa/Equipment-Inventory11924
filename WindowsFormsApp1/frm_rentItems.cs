@@ -23,6 +23,10 @@ namespace WindowsFormsApp1
             this.tblRentItemsTableAdapter.Fill(this.equipmentItemDBDataSet.TblRentItems);
             ReloadRentItemsData(); // Load data into the DataGridView on form load
             LoadCustomerNames();
+
+            lbl_Amount.TextChanged += (s, args) => CalculateBalance();
+            txt_quantity.TextChanged += (s, args) => CalculateBalance();
+            textBoxDays.TextChanged += (s, args) => CalculateBalance();
         }
 
         // Method to load customer names from the database into the ComboBox
@@ -82,9 +86,39 @@ namespace WindowsFormsApp1
 
         private void cb_RentItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedItem = cb_RentItems.SelectedItem.ToString();
-            DataTable itemData = GetItemDetailsFromDatabase(selectedItem);
-            dgv_RentItems.DataSource = itemData;
+            string selectedItem = cb_RentItems.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedItem))
+                return;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // Query to get the cost of the selected item
+                    string query = "SELECT Cost FROM TblEquipmentItems WHERE ItemName = @ItemName";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ItemName", selectedItem);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            float cost = Convert.ToSingle(result);
+                            lbl_Amount.Text = $"{cost:C}"; // Display as currency
+                        }
+                        else
+                        {
+                            lbl_Amount.Text = "N/A"; // Handle case where no cost is found
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error fetching item cost: {ex.Message}");
+                }
+            }
         }
 
         private DataTable GetItemDetailsFromDatabase(string itemName)
@@ -136,6 +170,12 @@ namespace WindowsFormsApp1
                 return;
             }
 
+            // Validate and get the number of days
+            if (!int.TryParse(textBoxDays.Text, out int rentalDays) || rentalDays <= 0)
+            {
+                MessageBox.Show("Please enter a valid number of rental days.");
+                return;
+            }
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -155,17 +195,15 @@ namespace WindowsFormsApp1
                             string category = reader["Category"].ToString();
                             string description = reader["Description"].ToString();
                             string condition = reader["Condition"].ToString();
-
                             string status = reader["Status"].ToString();
                             if (status == "Under Maintenance")
                             {
                                 MessageBox.Show("Item is under maintenance and cannot be rented.");
                                 return;
                             }
-
                             string serialNo = reader["SerialNo"].ToString();
                             int quantity = (int)reader["Quantity"];
-                            float cost = (float)Convert.ToDouble(reader["Cost"]);
+                            float costPerDay = (float)Convert.ToDouble(reader["Cost"]);
                             byte[] image = (byte[])reader["Image"];
 
                             if (quantity < transferQuantity)
@@ -174,9 +212,12 @@ namespace WindowsFormsApp1
                                 return;
                             }
 
+                            // Calculate the balance (total cost)
+                            float balance = costPerDay * transferQuantity * rentalDays;
+
                             // Insert item and selected customer name into TblRentItems
-                            string insertQuery = "INSERT INTO TblRentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, RentDate, Quantity, Cost, Image, CustomerName) " +
-                                "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @RentDate, @TransferQuantity, @Cost, @Image, @CustomerName)";
+                            string insertQuery = "INSERT INTO TblRentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, RentDate, ReturnDated, Quantity, Cost, Image, CustomerName) " +
+                                "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @RentDate, @ReturnDated, @TransferQuantity, @Cost, @Image, @CustomerName)";
 
                             using (SqlCommand insertCommand = new SqlCommand(insertQuery, conn))
                             {
@@ -188,17 +229,18 @@ namespace WindowsFormsApp1
                                 insertCommand.Parameters.AddWithValue("@Status", status);
                                 insertCommand.Parameters.AddWithValue("@SerialNo", serialNo);
                                 insertCommand.Parameters.AddWithValue("@RentDate", dtpRentDate.Value);
+                                insertCommand.Parameters.AddWithValue("@ReturnDated", dtpReturnDate.Value);
                                 insertCommand.Parameters.AddWithValue("@TransferQuantity", transferQuantity);
-                                insertCommand.Parameters.AddWithValue("@Cost", cost);
+                                insertCommand.Parameters.AddWithValue("@Cost", balance); // Use the calculated balance here
                                 insertCommand.Parameters.AddWithValue("@Image", image);
-                                insertCommand.Parameters.AddWithValue("@CustomerName", selectedCustomerName); // Use selected CustomerName
+                                insertCommand.Parameters.AddWithValue("@CustomerName", selectedCustomerName);
 
                                 reader.Close();
 
                                 int rowsAffected = insertCommand.ExecuteNonQuery();
                                 if (rowsAffected > 0)
                                 {
-                                    MessageBox.Show($"Item '{itemName}' successfully transferred to TblRentItems for customer '{selectedCustomerName}'.");
+                                    MessageBox.Show($"Item '{itemName}' successfully transferred to database Rent Items for customer '{selectedCustomerName}'.");
 
                                     // Update quantity in TblEquipmentItems
                                     string updateQuery = "UPDATE TblEquipmentItems SET Quantity = Quantity - @TransferQuantity WHERE ItemID = @ItemID";
@@ -234,7 +276,7 @@ namespace WindowsFormsApp1
                                 }
                                 else
                                 {
-                                    MessageBox.Show($"Failed to transfer item '{itemName}' to TblRentItems.");
+                                    MessageBox.Show($"Failed to transfer item '{itemName}' to Database of Rent Items.");
                                 }
                             }
                         }
@@ -246,6 +288,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
@@ -279,6 +322,30 @@ namespace WindowsFormsApp1
         {
             frm_AddCustomer addCustomerForm = new frm_AddCustomer();
             addCustomerForm.ShowDialog();
+        }
+
+        // //////////////////////////////////////////////////////////////////////////////////////////////
+        // Formula calculation method
+        private void CalculateBalance()
+        {
+            try
+            {
+                // Parse the input values
+                float amount = float.Parse(lbl_Amount.Text, System.Globalization.NumberStyles.Currency); // Rental amount per item
+                int quantity = int.Parse(txt_quantity.Text); // Number of items rented
+                int days = int.Parse(textBoxDays.Text); // Number of days for rental
+
+                // Calculate the balance
+                float balance = amount * quantity * days; // Example formula
+
+                // Display the calculated balance in the label
+                lblBalance.Text = $"{balance:C}"; // Formatting as currency
+            }
+            catch (FormatException)
+            {
+                // If input is not a valid number, show a default message or an error
+                lblBalance.Text = "00.00";
+            }
         }
     }
 }

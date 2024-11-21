@@ -93,6 +93,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Background_Grey {
+            get {
+                object obj = ResourceManager.GetObject("Background-Grey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap box_2_24 {
             get {
                 object obj = ResourceManager.GetObject("box-2-24", resourceCulture);
@@ -186,6 +196,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap edit_icon3_24 {
             get {
                 object obj = ResourceManager.GetObject("edit_icon3_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap futuristic_background_design {
+            get {
+                object obj = ResourceManager.GetObject("futuristic-background-design", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

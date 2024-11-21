@@ -110,7 +110,7 @@
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new System.Drawing.Point(75, 222);
+            descriptionLabel.Location = new System.Drawing.Point(74, 222);
             descriptionLabel.Name = "descriptionLabel";
             descriptionLabel.Size = new System.Drawing.Size(78, 16);
             descriptionLabel.TabIndex = 12;
@@ -119,7 +119,7 @@
             // conditionLabel
             // 
             conditionLabel.AutoSize = true;
-            conditionLabel.Location = new System.Drawing.Point(85, 318);
+            conditionLabel.Location = new System.Drawing.Point(86, 318);
             conditionLabel.Name = "conditionLabel";
             conditionLabel.Size = new System.Drawing.Size(66, 16);
             conditionLabel.TabIndex = 13;
@@ -138,7 +138,7 @@
             // datePurchasedLabel
             // 
             datePurchasedLabel.AutoSize = true;
-            datePurchasedLabel.Location = new System.Drawing.Point(473, 102);
+            datePurchasedLabel.Location = new System.Drawing.Point(478, 102);
             datePurchasedLabel.Name = "datePurchasedLabel";
             datePurchasedLabel.Size = new System.Drawing.Size(107, 16);
             datePurchasedLabel.TabIndex = 15;
@@ -147,16 +147,16 @@
             // serialNoLabel
             // 
             serialNoLabel.AutoSize = true;
-            serialNoLabel.Location = new System.Drawing.Point(519, 143);
+            serialNoLabel.Location = new System.Drawing.Point(455, 141);
             serialNoLabel.Name = "serialNoLabel";
-            serialNoLabel.Size = new System.Drawing.Size(66, 16);
+            serialNoLabel.Size = new System.Drawing.Size(130, 16);
             serialNoLabel.TabIndex = 17;
-            serialNoLabel.Text = "Serial No:";
+            serialNoLabel.Text = "Serial No. (Optional):";
             // 
             // quantityLabel
             // 
             quantityLabel.AutoSize = true;
-            quantityLabel.Location = new System.Drawing.Point(524, 176);
+            quantityLabel.Location = new System.Drawing.Point(527, 176);
             quantityLabel.Name = "quantityLabel";
             quantityLabel.Size = new System.Drawing.Size(58, 16);
             quantityLabel.TabIndex = 19;
@@ -317,6 +317,11 @@
             this.NumUD_Quantity.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.tblEquipmentItemsBindingSource, "Quantity", true));
             this.NumUD_Quantity.Location = new System.Drawing.Point(599, 174);
             this.NumUD_Quantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.NumUD_Quantity.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.NumUD_Quantity.Name = "NumUD_Quantity";
             this.NumUD_Quantity.Size = new System.Drawing.Size(251, 22);
             this.NumUD_Quantity.TabIndex = 20;

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -15,6 +17,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             DatabaseConnection();
         }
+      
 
         private void DatabaseConnection()
         {
@@ -24,18 +27,19 @@ namespace WindowsFormsApp1
 
         private void frm_Settings_Load(object sender, EventArgs e)
         {
-            if (ulog.type == "A")
+            if (ulog.Type == "A")
             {
                 adduseradmin.Visible = true;
             }
-            else if (ulog.type == "U")
+            else if (ulog.Type == "U")
             {
                 adduseradmin.Visible = false;
             }
             // TODO: This line of code loads data into the 'appData.tbllog' table. You can move, or remove it, as needed.
             this.tbllogTableAdapter.Fill(this.appData.tbllog);
             Edit(false);
-
+           
+            dgv_adminuser.Refresh();
         }
 
         private void Edit(bool value)
@@ -207,27 +211,6 @@ namespace WindowsFormsApp1
         {
             Edit(false);
             tbllogBindingSource.ResetBindings(false);
-        }
-
-        private void btn_ChangeProfilePicture_Click(object sender, EventArgs e)
-        {
-            String imageLocation = "";
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*.*)|*.*";
-
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    imageLocation = dialog.FileName;
-
-                    pictureBox_ProfilePicture.ImageLocation = imageLocation;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void dgv_adminuser_CellContentClick(object sender, DataGridViewCellEventArgs e)
