@@ -128,7 +128,8 @@ namespace WindowsFormsApp1
             try
             {
                 // Use the connection inside the 'using' block
-                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""|DataDirectory|\EquipmentItemDB.mdf"";
+                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
+                        AttachDbFilename=""|DataDirectory|\EquipmentItemDB.mdf"";
                         Integrated Security=True")) 
                 {
                     conn.Open();
