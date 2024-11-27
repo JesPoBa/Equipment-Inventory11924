@@ -14,7 +14,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-            // Retrieve the connection string from App.config
             connectionString = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
 
             UpdateTotalLabel();

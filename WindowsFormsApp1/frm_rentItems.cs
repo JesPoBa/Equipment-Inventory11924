@@ -179,7 +179,8 @@ namespace WindowsFormsApp1
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT ItemID, ItemName, Category, Description, Condition, Status, SerialNo, Quantity, Cost, Image FROM TblEquipmentItems WHERE ItemName = @ItemName";
+                string query = "SELECT ItemID, ItemName, Category, Description, Condition, Status, SerialNo, Quantity, Cost, Image " +
+                    "FROM TblEquipmentItems WHERE ItemName = @ItemName";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@ItemName", selectedItem);
@@ -216,8 +217,10 @@ namespace WindowsFormsApp1
                             float balance = costPerDay * transferQuantity * rentalDays;
 
                             // Insert item and selected customer name into TblRentItems
-                            string insertQuery = "INSERT INTO TblRentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, RentDate, ReturnDated, Quantity, Cost, Image, CustomerName) " +
-                                "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @RentDate, @ReturnDated, @TransferQuantity, @Cost, @Image, @CustomerName)";
+                            string insertQuery = "INSERT INTO TblRentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo," +
+                                            "RentDate, ReturnDated, Quantity, Cost, Image, CustomerName) " +
+                                "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @RentDate, @ReturnDated, " +
+                                            "@TransferQuantity, @Cost, @Image, @CustomerName)";
 
                             using (SqlCommand insertCommand = new SqlCommand(insertQuery, conn))
                             {
@@ -240,7 +243,8 @@ namespace WindowsFormsApp1
                                 int rowsAffected = insertCommand.ExecuteNonQuery();
                                 if (rowsAffected > 0)
                                 {
-                                    MessageBox.Show($"Item '{itemName}' successfully transferred to database Rent Items for customer '{selectedCustomerName}'.");
+                                    MessageBox.Show($"Item '{itemName}' successfully transferred to database Rent Items for customer" +
+                                                    $" '{selectedCustomerName}'.");
 
                                     // Update quantity in TblEquipmentItems
                                     string updateQuery = "UPDATE TblEquipmentItems SET Quantity = Quantity - @TransferQuantity WHERE ItemID = @ItemID";
