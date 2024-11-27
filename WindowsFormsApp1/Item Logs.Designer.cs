@@ -204,6 +204,7 @@
             this.itemIDDataGridViewTextBoxColumn.HeaderText = "Item ID";
             this.itemIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
+            this.itemIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.itemIDDataGridViewTextBoxColumn.Visible = false;
             this.itemIDDataGridViewTextBoxColumn.Width = 125;
             // 
@@ -213,6 +214,7 @@
             this.itemNameDataGridViewTextBoxColumn.HeaderText = "Item Name";
             this.itemNameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.itemNameDataGridViewTextBoxColumn.Name = "itemNameDataGridViewTextBoxColumn";
+            this.itemNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.itemNameDataGridViewTextBoxColumn.Width = 125;
             // 
             // actionDataGridViewTextBoxColumn
@@ -221,6 +223,7 @@
             this.actionDataGridViewTextBoxColumn.HeaderText = "Action";
             this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
+            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
             this.actionDataGridViewTextBoxColumn.Width = 125;
             // 
             // dateDataGridViewTextBoxColumn
@@ -229,6 +232,7 @@
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
             this.dateDataGridViewTextBoxColumn.Width = 125;
             // 
             // timeDataGridViewTextBoxColumn
@@ -237,6 +241,7 @@
             this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
             this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
             this.timeDataGridViewTextBoxColumn.Width = 125;
             // 
             // loggedByDataGridViewTextBoxColumn
@@ -245,6 +250,7 @@
             this.loggedByDataGridViewTextBoxColumn.HeaderText = "Logged By";
             this.loggedByDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.loggedByDataGridViewTextBoxColumn.Name = "loggedByDataGridViewTextBoxColumn";
+            this.loggedByDataGridViewTextBoxColumn.ReadOnly = true;
             this.loggedByDataGridViewTextBoxColumn.Width = 125;
             // 
             // assignedToDataGridViewTextBoxColumn
@@ -253,6 +259,7 @@
             this.assignedToDataGridViewTextBoxColumn.HeaderText = "Assigned To";
             this.assignedToDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.assignedToDataGridViewTextBoxColumn.Name = "assignedToDataGridViewTextBoxColumn";
+            this.assignedToDataGridViewTextBoxColumn.ReadOnly = true;
             this.assignedToDataGridViewTextBoxColumn.Width = 125;
             // 
             // conditionDataGridViewTextBoxColumn
@@ -261,6 +268,7 @@
             this.conditionDataGridViewTextBoxColumn.HeaderText = "Condition";
             this.conditionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.conditionDataGridViewTextBoxColumn.Name = "conditionDataGridViewTextBoxColumn";
+            this.conditionDataGridViewTextBoxColumn.ReadOnly = true;
             this.conditionDataGridViewTextBoxColumn.Width = 125;
             // 
             // tblLogsBindingSource

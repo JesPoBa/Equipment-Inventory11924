@@ -364,7 +364,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EIMS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frm_dashboard_Load);
             this.sidebar.ResumeLayout(false);
             this.sidebar.PerformLayout();
             this.panel1.ResumeLayout(false);

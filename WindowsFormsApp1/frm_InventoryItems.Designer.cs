@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label_Dashboard = new System.Windows.Forms.Label();
             this.btn_rentItem = new System.Windows.Forms.Button();
             this.txt_Search = new System.Windows.Forms.TextBox();
@@ -142,7 +142,6 @@
             this.txt_Search.Name = "txt_Search";
             this.txt_Search.Size = new System.Drawing.Size(309, 31);
             this.txt_Search.TabIndex = 7;
-            this.txt_Search.TextChanged += new System.EventHandler(this.txt_Search_TextChanged);
             this.txt_Search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.txt_Search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Search_KeyUp);
             // 
@@ -179,8 +178,8 @@
             // itemIDDataGridViewTextBoxColumn
             // 
             this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.itemIDDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.itemIDDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.itemIDDataGridViewTextBoxColumn.HeaderText = "Item ID";
             this.itemIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
@@ -284,13 +283,13 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(215, 58);
+            this.contextMenuStrip.Size = new System.Drawing.Size(172, 30);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.x_mark_24;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.deleteToolStripMenuItem.Text = "Delete a Row";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -701,7 +700,6 @@
             this.txt_SearchRentItems.Name = "txt_SearchRentItems";
             this.txt_SearchRentItems.Size = new System.Drawing.Size(309, 31);
             this.txt_SearchRentItems.TabIndex = 18;
-            this.txt_SearchRentItems.TextChanged += new System.EventHandler(this.txt_SearchRentItems_TextChanged);
             this.txt_SearchRentItems.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_SearchRentItems_KeyUp);
             // 
             // btn_SearchRentItems

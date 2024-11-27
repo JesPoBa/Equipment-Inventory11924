@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.appData = new WindowsFormsApp1.AppData();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnChangePasswordforUser = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox_ProfilePicture = new System.Windows.Forms.PictureBox();
+            this.appData = new WindowsFormsApp1.AppData();
             this.tbllogBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.adduseradmin = new System.Windows.Forms.GroupBox();
             this.dgv_adminuser = new System.Windows.Forms.DataGridView();
+            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -49,13 +54,9 @@
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_new = new System.Windows.Forms.Button();
             this.tbllogTableAdapter = new WindowsFormsApp1.AppDataTableAdapters.tbllogTableAdapter();
-            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.appData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ProfilePicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbllogBindingSource)).BeginInit();
             this.adduseradmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_adminuser)).BeginInit();
@@ -63,7 +64,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.btnChangePasswordforUser);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.pictureBox_ProfilePicture);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,21 +77,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Account Settings";
             // 
-            // appData
+            // btnChangePasswordforUser
             // 
-            this.appData.DataSetName = "AppData";
-            this.appData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("Segoe UI Symbol", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(174, 82);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(165, 36);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Change Password";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnChangePasswordforUser.Font = new System.Drawing.Font("Segoe UI Symbol", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePasswordforUser.Location = new System.Drawing.Point(174, 82);
+            this.btnChangePasswordforUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChangePasswordforUser.Name = "btnChangePasswordforUser";
+            this.btnChangePasswordforUser.Size = new System.Drawing.Size(165, 36);
+            this.btnChangePasswordforUser.TabIndex = 8;
+            this.btnChangePasswordforUser.Text = "Change Password";
+            this.btnChangePasswordforUser.UseVisualStyleBackColor = true;
+            this.btnChangePasswordforUser.Click += new System.EventHandler(this.btnChangePasswordforUser_Click);
             // 
             // label5
             // 
@@ -113,6 +110,11 @@
             this.pictureBox_ProfilePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_ProfilePicture.TabIndex = 4;
             this.pictureBox_ProfilePicture.TabStop = false;
+            // 
+            // appData
+            // 
+            this.appData.DataSetName = "AppData";
+            this.appData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tbllogBindingSource
             // 
@@ -146,6 +148,14 @@
             // dgv_adminuser
             // 
             this.dgv_adminuser.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_adminuser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_adminuser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_adminuser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Username,
@@ -160,6 +170,41 @@
             this.dgv_adminuser.Size = new System.Drawing.Size(633, 383);
             this.dgv_adminuser.TabIndex = 8;
             this.dgv_adminuser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_adminuser_CellContentClick);
+            // 
+            // Username
+            // 
+            this.Username.DataPropertyName = "Username";
+            this.Username.HeaderText = "User Name";
+            this.Username.MinimumWidth = 6;
+            this.Username.Name = "Username";
+            this.Username.Width = 300;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 125;
+            // 
+            // Password
+            // 
+            this.Password.DataPropertyName = "Password";
+            this.Password.HeaderText = "Password";
+            this.Password.MinimumWidth = 6;
+            this.Password.Name = "Password";
+            this.Password.Visible = false;
+            this.Password.Width = 125;
+            // 
+            // Role
+            // 
+            this.Role.DataPropertyName = "Role";
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 6;
+            this.Role.Name = "Role";
+            this.Role.Width = 125;
             // 
             // label11
             // 
@@ -205,7 +250,7 @@
             this.cb_role.Margin = new System.Windows.Forms.Padding(4);
             this.cb_role.Name = "cb_role";
             this.cb_role.Size = new System.Drawing.Size(213, 36);
-            this.cb_role.TabIndex = 6;
+            this.cb_role.TabIndex = 7;
             // 
             // txt_password
             // 
@@ -214,7 +259,7 @@
             this.txt_password.Margin = new System.Windows.Forms.Padding(4);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(387, 34);
-            this.txt_password.TabIndex = 5;
+            this.txt_password.TabIndex = 6;
             // 
             // txt_userName
             // 
@@ -284,41 +329,6 @@
             // 
             this.tbllogTableAdapter.ClearBeforeFill = true;
             // 
-            // Username
-            // 
-            this.Username.DataPropertyName = "Username";
-            this.Username.HeaderText = "User Name";
-            this.Username.MinimumWidth = 6;
-            this.Username.Name = "Username";
-            this.Username.Width = 300;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            this.Id.Width = 125;
-            // 
-            // Password
-            // 
-            this.Password.DataPropertyName = "Password";
-            this.Password.HeaderText = "Password";
-            this.Password.MinimumWidth = 6;
-            this.Password.Name = "Password";
-            this.Password.Visible = false;
-            this.Password.Width = 125;
-            // 
-            // Role
-            // 
-            this.Role.DataPropertyName = "Role";
-            this.Role.HeaderText = "Role";
-            this.Role.MinimumWidth = 6;
-            this.Role.Name = "Role";
-            this.Role.Width = 125;
-            // 
             // frm_Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -335,8 +345,8 @@
             this.Load += new System.EventHandler(this.frm_Settings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.appData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ProfilePicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbllogBindingSource)).EndInit();
             this.adduseradmin.ResumeLayout(false);
             this.adduseradmin.PerformLayout();
@@ -349,7 +359,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox_ProfilePicture;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnChangePasswordforUser;
         private System.Windows.Forms.GroupBox adduseradmin;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cb_role;

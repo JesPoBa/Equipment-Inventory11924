@@ -11,6 +11,7 @@ namespace WindowsFormsApp1
     public partial class frm_InventoryItems : Form
     {
         private SqlConnection conn;
+        private string user;
 
         public frm_InventoryItems()
         {
@@ -169,14 +170,13 @@ namespace WindowsFormsApp1
             }
             finally
             {
-                // Close the connection after the operation
                 conn.Close();
             }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            RefreshData(); // Call the method that refreshes both DataGridViews
+            RefreshData();
         }
 
         private void btn_rentItem_Click(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace WindowsFormsApp1
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            string searchText = txt_Search.Text.Trim(); // Get the text from the search box
+            string searchText = txt_Search.Text.Trim(); 
             SearchInventoryItems(searchText);
         }
 
@@ -243,23 +243,17 @@ namespace WindowsFormsApp1
 
             try
             {
-                // Open connection
                 conn.Open();
 
-                // Create the command and set the search parameter
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
 
-                // Create a data adapter
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
 
-                // Create a DataTable to hold the data
                 DataTable dt = new DataTable();
 
-                // Fill the DataTable with data
                 da.Fill(dt);
 
-                // Bind the data to the DataGridView
                 dgv_RentItems.DataSource = dt;
             }
             catch (SqlException ex)
@@ -268,7 +262,6 @@ namespace WindowsFormsApp1
             }
             finally
             {
-                // Close the connection after the operation
                 conn.Close();
             }
         }
@@ -277,6 +270,7 @@ namespace WindowsFormsApp1
         {
             SearchRentItems(txt_SearchRentItems.Text.Trim());
         }
+
 
         private void btn_TransferToReturned_Click(object sender, EventArgs e)
         {
@@ -302,6 +296,7 @@ namespace WindowsFormsApp1
                     // Insert the rented item into the Returned Items table
                     string insertQuery = "INSERT INTO TblReturnedItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, Quantity, RentDate, ReturnDate, Cost) " +
                                          "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @SerialNo, @Quantity, @RentDate, @ReturnDate, @Cost)";
+
                     SqlCommand insertCmd = new SqlCommand(insertQuery, conn);
                     insertCmd.Parameters.AddWithValue("@ItemID", itemId);
                     insertCmd.Parameters.AddWithValue("@ItemName", itemName);
@@ -323,6 +318,7 @@ namespace WindowsFormsApp1
                     updateCmd.Parameters.AddWithValue("@ItemID", itemId);
                     int rowsAffected = updateCmd.ExecuteNonQuery();
 
+                    // If item doesn't exist, add it
                     if (rowsAffected == 0)
                     {
                         string insertEquipmentQuery = "INSERT INTO TblEquipmentItems (ItemID, ItemName, Category, Description, Condition, Status, SerialNo, Quantity) " +
@@ -354,17 +350,16 @@ namespace WindowsFormsApp1
                     logCmd.Parameters.AddWithValue("@Action", "Returned");
                     logCmd.Parameters.AddWithValue("@Date", DateTime.Now.Date);
                     logCmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
-                    logCmd.Parameters.AddWithValue("@LoggedBy", "Current User"); // Replace with actual username if available
-                    logCmd.Parameters.AddWithValue("@AssignedTo", "Customer Name"); // Replace with actual customer name if available
+                    logCmd.Parameters.AddWithValue("@LoggedBy", user); 
+                    logCmd.Parameters.AddWithValue("@AssignedTo", ""); 
                     logCmd.Parameters.AddWithValue("@Condition", condition);
                     logCmd.ExecuteNonQuery();
 
-                    // Refresh DataGridViews
                     RefreshRentItems();
                     RefreshReturnedItems();
                     RefreshEquipmentItems();
 
-                    MessageBox.Show("Item successfully transferred to Returned Items, updated in Equipment Items, and logged in Item Logs.");
+                    MessageBox.Show("Item successfully transferred to Returned Items and updated in Equipment Items.");
                 }
                 catch (SqlException ex)
                 {
@@ -381,33 +376,16 @@ namespace WindowsFormsApp1
             }
         }
 
-
-        private void txt_Search_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_SearchRentItems_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        // Function to delete a row from a given DataGridView
         private void DeleteRowFromDataGridView(DataGridView dgv)
         {
-            // Check if a row is selected
             if (dgv.SelectedRows.Count > 0)
             {
-                // Get the selected row
                 DataGridViewRow selectedRow = dgv.SelectedRows[0];
 
-                // Optionally, get the ID or primary key (ItemID) if you need to delete from a database
                 var itemId = selectedRow.Cells["itemIDDataGridViewTextBoxColumn"].Value;
 
-                // Determine which table to delete from based on the DataGridView
                 string tableName = dgv == dgv_InventoryList ? "TblEquipmentItems" : "TblRentItems";
 
-                // Confirm deletion
                 DialogResult result = MessageBox.Show(
                     "Are you sure you want to delete this row?",
                     "Confirm Deletion",
@@ -418,10 +396,8 @@ namespace WindowsFormsApp1
                 {
                     try
                     {
-                        // Remove from DataGridView
                         dgv.Rows.Remove(selectedRow);
 
-                        // Update the database (delete from the correct table)
                         DeleteItemFromDatabase(itemId, tableName);
 
                         MessageBox.Show("Row deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -438,14 +414,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        // Delete from Database (differentiates between TblEquipmentItems and TblRentItems)
         private void DeleteItemFromDatabase(object itemId, string tableName)
         {
             try
             {
                 string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;";
 
-                // Prepare query to delete from the specified table
                 string query = $"DELETE FROM {tableName} WHERE ItemID = @ItemID";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -464,7 +438,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        // For each context menu item click, call the delete function with the appropriate DataGridView
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteRowFromDataGridView(dgv_InventoryList);
@@ -475,10 +448,8 @@ namespace WindowsFormsApp1
             DeleteRowFromDataGridView(dgv_RentItems);
         }
 
-
         private DataGridView ActiveDataGridView()
         {
-            // Identify which DataGridView is active or clicked
             if (dgv_InventoryList.Focused)
                 return dgv_InventoryList;
             if (dgv_RentItems.Focused)

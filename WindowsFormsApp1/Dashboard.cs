@@ -11,7 +11,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             lbl_loguser.Text = log;
-
         }
 
         public frm_dashboard()
@@ -42,14 +41,12 @@ namespace WindowsFormsApp1
                     sidebarTimer.Stop();
                 }
             }
-
         }
 
         private void menuButton_Click_1(object sender, EventArgs e)
         {
             sidebarTimer.Start();
         }
-
 
         private void buttonDashboard_Click(object sender, EventArgs e)
         {
@@ -70,9 +67,7 @@ namespace WindowsFormsApp1
             fii.BringToFront();
             fii.Show();
 
-            // Call the RefreshData method
             fii.RefreshData();
-
         }
 
         private void buttonItemLogs_Click(object sender, EventArgs e)
@@ -95,26 +90,14 @@ namespace WindowsFormsApp1
             fs.Show();
         }
 
-        private void frm_dashboard_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel21_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-
             if (MessageBox.Show("Are you sure you want to logout?", "Logout message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 frm_Login fr = new frm_Login();
                 fr.Show();
                 this.Hide();
             }
-
         }
     }
 }
