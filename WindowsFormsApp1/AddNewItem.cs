@@ -55,8 +55,10 @@ namespace WindowsFormsApp1.Inventory_Folder
         private void SaveNewItem()
         {
             // SQL query to insert data into TblEquipmentItems
-            string insertItemQuery = "INSERT INTO TblEquipmentItems (ItemID, ItemName, Category, Description, Condition, Status, DatePurchased, SerialNo, Quantity, Cost, Image) " +
-                                     "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @DatePurchased, @SerialNo, @Quantity, @Cost, @Image)";
+            string insertItemQuery = "INSERT INTO TblEquipmentItems (ItemID, ItemName, Category, Description, Condition, Status, " +
+                "DatePurchased, SerialNo, Quantity, Cost, Image) " +
+                                     "VALUES (@ItemID, @ItemName, @Category, @Description, @Condition, @Status, @DatePurchased, " +
+                                     "@SerialNo, @Quantity, @Cost, @Image)";
 
             using (SqlConnection conn = DatabaseConnection())
             {
