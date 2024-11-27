@@ -396,7 +396,8 @@ namespace WindowsFormsApp1
 
                         DeleteItemFromDatabase(itemId, tableName);
 
-                        MessageBox.Show("Row deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Row deleted successfully!", "Success", MessageBoxButtons.OK, 
+                            MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -406,7 +407,8 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a row to delete.", "No Selection", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -414,7 +416,8 @@ namespace WindowsFormsApp1
         {
             try
             {
-                string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;";
+                string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;
+                    AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;";
 
                 string query = $"DELETE FROM {tableName} WHERE ItemID = @ItemID";
 
@@ -430,7 +433,8 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error deleting from database: {ex.Message}", 
+                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
