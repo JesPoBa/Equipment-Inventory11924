@@ -128,7 +128,8 @@ namespace WindowsFormsApp1
             try
             {
                 // Use the connection inside the 'using' block
-                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""|DataDirectory|\EquipmentItemDB.mdf"";Integrated Security=True")) // Ensure you are using your connection string here
+                using (SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""|DataDirectory|\EquipmentItemDB.mdf"";
+                        Integrated Security=True")) 
                 {
                     conn.Open();
 
@@ -147,21 +148,16 @@ namespace WindowsFormsApp1
 
         private void RefreshReturnedItems()
         {
-            // SQL query to fetch data from the returned items table
             string query = "SELECT * FROM TblReturnedItems";
 
             try
             {
-                // Create a data adapter to fetch the data
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
 
-                // Create a DataTable to hold the data
                 DataTable dt = new DataTable();
 
-                // Fill the DataTable with data
                 da.Fill(dt);
 
-                // Bind the data to the DataGridView
                 dgv_ReturnedItems.DataSource = dt;
             }
             catch (SqlException ex)
@@ -193,7 +189,7 @@ namespace WindowsFormsApp1
 
         private void SearchInventoryItems(string searchText)
         {
-            string query = "SELECT * FROM TblEquipmentItems WHERE ItemName LIKE @searchText"; // Adjust the query to match your columns
+            string query = "SELECT * FROM TblEquipmentItems WHERE ItemName LIKE @searchText";
 
             try
             {
@@ -221,7 +217,6 @@ namespace WindowsFormsApp1
             }
             finally
             {
-                // Close the connection after the operation
                 conn.Close();
             }
         }
@@ -233,13 +228,13 @@ namespace WindowsFormsApp1
 
         private void btn_SearchRentItems_Click(object sender, EventArgs e)
         {
-            string searchText = txt_SearchRentItems.Text.Trim(); // Get the text from the search box
+            string searchText = txt_SearchRentItems.Text.Trim();
             SearchRentItems(searchText);
         }
 
         private void SearchRentItems(string searchText)
         {
-            string query = "SELECT * FROM TblRentItems WHERE ItemName LIKE @searchText"; // Adjust the query to match your columns
+            string query = "SELECT * FROM TblRentItems WHERE ItemName LIKE @searchText";
 
             try
             {
