@@ -21,7 +21,8 @@ namespace WindowsFormsApp1
 
         private void DatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["WindowsFormsApp1.Properties.Settings.uaDBConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings
+                ["WindowsFormsApp1.Properties.Settings.uaDBConnectionString"].ConnectionString;
             conn = new SqlConnection(connectionString);
         }
 
@@ -35,7 +36,7 @@ namespace WindowsFormsApp1
             {
                 adduseradmin.Visible = false;
             }
-            // TODO: This line of code loads data into the 'appData.tbllog' table. You can move, or remove it, as needed.
+
             this.tbllogTableAdapter.Fill(this.appData.tbllog);
             Edit(false);
            
@@ -54,10 +55,10 @@ namespace WindowsFormsApp1
             try
             {
                 Edit(true);
-                // Clear input fields for new entry
+                
                 txt_userName.Clear();
                 txt_password.Clear();
-                cb_role.SelectedIndex = -1; // Or set to a default value if necessary
+                cb_role.SelectedIndex = -1; 
                 appData.tbllog.AddtbllogRow(appData.tbllog.NewtbllogRow());
                 tbllogBindingSource.MoveLast();
                 txt_userName.Focus();
@@ -90,7 +91,8 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("Please select a user to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a user to edit.", 
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -98,7 +100,6 @@ namespace WindowsFormsApp1
         {
             try
             {
-                // Open the connection
                 conn.Open();
 
                 string query;
@@ -117,7 +118,8 @@ namespace WindowsFormsApp1
 
                     if (exists == 0)
                     {
-                        MessageBox.Show("The record no longer exists in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The record no longer exists in the database.", 
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -143,7 +145,8 @@ namespace WindowsFormsApp1
 
                 if (records > 0)
                 {
-                    MessageBox.Show("Your data has been successfully saved.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Your data has been successfully saved.", 
+                        "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Refresh the DataGridView and reset controls
                     tbllogTableAdapter.Fill(appData.tbllog);
@@ -152,7 +155,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("No records were affected. Please check your input.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No records were affected. Please check your input.", 
+                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -173,7 +177,8 @@ namespace WindowsFormsApp1
         {
             if (dgv_adminuser.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Are you sure you want to delete this record?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure you want to delete this record?", "Message", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
@@ -181,21 +186,23 @@ namespace WindowsFormsApp1
                         DataGridViewRow selectedRow = dgv_adminuser.SelectedRows[0];
 
                         // Retrieve the Id from the hidden column
-                        int selectedId = Convert.ToInt32(selectedRow.Cells["Id"].Value); // Assuming you have an Id column that is hidden
+                        int selectedId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
 
                         string query = "DELETE FROM tbllog WHERE Id = @Id";
                         conn.Open();
                         cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@Id", selectedId); // Use the Id parameter for the delete
+                        cmd.Parameters.AddWithValue("@Id", selectedId); 
 
                         int records = cmd.ExecuteNonQuery();
                         if (records > 0)
                         {
-                            MessageBox.Show("The record has been successfully deleted.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("The record has been successfully deleted.", "Message", 
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("No records were deleted. Please check if the record exists.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("No records were deleted. Please check if the record exists.", "Message", 
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         // Remove the current item from the BindingSource
                         tbllogBindingSource.RemoveCurrent();
@@ -217,7 +224,8 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("Please select a record to delete.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a record to delete.",
+                    "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -241,14 +249,16 @@ namespace WindowsFormsApp1
             string currentPassword = PromptForPassword("Enter your current password:");
             if (string.IsNullOrEmpty(currentPassword))
             {
-                MessageBox.Show("Current password cannot be empty.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Current password cannot be empty.", 
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string newPassword = PromptForPassword("Enter your new password:");
             if (string.IsNullOrEmpty(newPassword))
             {
-                MessageBox.Show("New password cannot be empty.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("New password cannot be empty.", 
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -262,7 +272,8 @@ namespace WindowsFormsApp1
             int userExists = (int)cmd.ExecuteScalar();
             if (userExists == 0)
             {
-                MessageBox.Show("Current password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Current password is incorrect.", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 conn.Close();
                 return;
             }
@@ -276,11 +287,13 @@ namespace WindowsFormsApp1
             int recordsAffected = cmd.ExecuteNonQuery();
             if (recordsAffected > 0)
             {
-                MessageBox.Show("Password changed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Password changed successfully.", 
+                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Password change failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Password change failed. Please try again.", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             conn.Close();
@@ -297,7 +310,14 @@ namespace WindowsFormsApp1
 
                 Label textLabel = new Label() { Left = 20, Top = 20, Width = 260, Text = message };
                 TextBox textBox = new TextBox() { Left = 20, Top = 50, Width = 260, PasswordChar = '*' };
-                Button confirmation = new Button() { Text = "Ok", Left = 100, Width = 100, Top = 90, DialogResult = DialogResult.OK };
+                Button confirmation = new Button() 
+                { 
+                    Text = "Ok", 
+                    Left = 100, 
+                    Width = 100, 
+                    Top = 90, 
+                    DialogResult = DialogResult.OK 
+                };
 
                 confirmation.Click += (sender, e) => { prompt.Close(); };
                 prompt.Controls.Add(textLabel);

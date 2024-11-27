@@ -2,28 +2,28 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Configuration; // Make sure to include this namespace
-using System.IO; // For file operations
-using System.Text; // For StringBuilder
+using System.Configuration; 
+using System.IO; 
+using System.Text; 
 
 namespace WindowsFormsApp1
 {
     public partial class frm_ItemLogs : Form
     {
-        // Use the connection string from App.config
         private readonly string connectionStringEDB;
 
         public frm_ItemLogs()
         {
             InitializeComponent();
-            connectionStringEDB = ConfigurationManager.ConnectionStrings["EquipmentInventoryDB"].ConnectionString;
+            connectionStringEDB = ConfigurationManager.ConnectionStrings
+                ["EquipmentInventoryDB"].ConnectionString;
             LoadLogsData();
         }
 
         // Method to load data from tbl_Logs and display in dgv_LogView
         private void LoadLogsData()
         {
-            string query = "SELECT * FROM tbl_Logs"; // SQL query to retrieve data from tbl_Logs
+            string query = "SELECT * FROM tbl_Logs"; 
 
             using (SqlConnection conn = new SqlConnection(connectionStringEDB))
             {
@@ -32,9 +32,9 @@ namespace WindowsFormsApp1
                     conn.Open();
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(query, conn);
                     DataTable logsTable = new DataTable();
-                    dataAdapter.Fill(logsTable); // Fill DataTable with data from tbl_Logs
+                    dataAdapter.Fill(logsTable); 
 
-                    dgv_LogView.DataSource = logsTable; // Bind DataTable to DataGridView
+                    dgv_LogView.DataSource = logsTable; 
                 }
                 catch (SqlException ex)
                 {
@@ -67,7 +67,8 @@ namespace WindowsFormsApp1
             string searchText = textBoxSearch.Text.Trim(); 
             if (string.IsNullOrEmpty(searchText))
             {
-                MessageBox.Show("Please enter an item name to search.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please enter an item name to search.", "Input Required", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -163,8 +164,8 @@ namespace WindowsFormsApp1
                             string filePath = Path.Combine(folderPath, $"{tableName}.csv");
                             File.WriteAllText(filePath, csvContent.ToString(), Encoding.UTF8);
 
-                            MessageBox.Show($"Exported table {tableName} to {filePath}", "Export Successful",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"Exported table {tableName} to {filePath}", 
+                                "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
                         conn.Close();
