@@ -38,7 +38,8 @@ namespace WindowsFormsApp1
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("An error occurred while accessing the database: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An error occurred while accessing the database: " + ex.Message,
+                        "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -58,20 +59,19 @@ namespace WindowsFormsApp1
                 btn_Export.Visible = false;
             }
 
-            // TODO: This line of code loads data into the 'equipmentItemDBDataSet.tbl_Logs' table. You can move, or remove it, as needed.
             this.tbl_LogsTableAdapter.Fill(this.equipmentItemDBDataSet.tbl_Logs);
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            string searchText = textBoxSearch.Text.Trim(); // Get the search text from the TextBox
+            string searchText = textBoxSearch.Text.Trim(); 
             if (string.IsNullOrEmpty(searchText))
             {
                 MessageBox.Show("Please enter an item name to search.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            string query = "SELECT * FROM tbl_Logs WHERE ItemName LIKE @SearchText"; // SQL query with a parameter for filtering
+            string query = "SELECT * FROM tbl_Logs WHERE ItemName LIKE @SearchText"; 
 
             using (SqlConnection conn = new SqlConnection(connectionStringEDB))
             {
@@ -80,23 +80,25 @@ namespace WindowsFormsApp1
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@SearchText", "%" + searchText + "%"); // Add parameter with wildcard for partial matching
+                        cmd.Parameters.AddWithValue("@SearchText", "%" + searchText + "%");
 
                         SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                         DataTable filteredTable = new DataTable();
-                        dataAdapter.Fill(filteredTable); // Fill DataTable with filtered data
+                        dataAdapter.Fill(filteredTable); 
 
-                        dgv_LogView.DataSource = filteredTable; // Update DataGridView with the filtered data
+                        dgv_LogView.DataSource = filteredTable; 
 
                         if (filteredTable.Rows.Count == 0)
                         {
-                            MessageBox.Show("No records found matching the search criteria.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("No records found matching the search criteria.", 
+                                "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("An error occurred while searching the database: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An error occurred while searching the database: " + ex.Message,
+                        "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -161,7 +163,8 @@ namespace WindowsFormsApp1
                             string filePath = Path.Combine(folderPath, $"{tableName}.csv");
                             File.WriteAllText(filePath, csvContent.ToString(), Encoding.UTF8);
 
-                            MessageBox.Show($"Exported table {tableName} to {filePath}", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"Exported table {tableName} to {filePath}", "Export Successful",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
                         conn.Close();
@@ -170,7 +173,8 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while exporting records: " + ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred while exporting records: " + ex.Message, "Export Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
